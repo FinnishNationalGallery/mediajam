@@ -1,0 +1,16 @@
+email-validator
+Flask
+Flask-Executor
+Flask-Login
+Flask-Mail
+Flask-SQLAlchemy
+Flask-WTF
+gunicorn
+pysftp
+python-dotenv
+requests
+SQLAlchemy
+WTForms
+xmltodict
+datetime
+python-dateutil
