@@ -13,16 +13,12 @@ Application is tested with AlmaLinux 9 server. Flask application was installed a
 https://gunicorn.org/
 
 ## Installation
-
 As user root:
-
 ``````
 adduser pasisti
 passwd pasisti
 ``````
-
 ### Install MediaJam as user pasisti:
-
 ``````
 cd /home/pasisti
 git clone https://github.com/FinnishNationalGallery/mediajam.git mediahillo
@@ -31,10 +27,9 @@ python3 -m venv venv/ 
 source venv/bin/activate
 pip install -r requirements.txt
 ``````
-
 ### Install dpres-siptools as user pasisti:
-
 ``````
+cd /home/pasisti/mediahillo
 git clone https://github.com/Digital-Preservation-Finland/dpres-siptools
 cd dpres-siptools
 pip install --upgrade pip==20.2.4 setuptools
@@ -42,9 +37,7 @@ pip install -r requirements_github.txt
 pip install .
 import-object --help
 ``````
-
 ### Install and configure NGINX as user root:
-
 ``````
 dnf update -y && dnf upgrade -y
 dnf install nano
@@ -70,9 +63,7 @@ nano /etc/nginx/nginx.conf
 # 
 systemctl restart nginx
 ``````
-
 ### Start Flask application with gunicorn www-server as user pasisti:
-
 ``````
 cd /home/pasisti/mediahillo
 # Configure .env file from env.txt 
@@ -82,9 +73,7 @@ cp env.txt .env
 gunicorn -w 1 --timeout 28800 'app:app'
 # Now you can go to servers home page and see MediaJam in action
 ``````
-
 #### Other commands for gunicorn management:
-
 ``````
 # Start gunicorn to background and use access and error logfiles
 gunicorn -w 1 --timeout 28800 'app:app' --access-logfile gunicorn-access.txt --error-logfile gunicorn-error.txt &
