@@ -21,7 +21,7 @@ dnf install mediainfo-gui mediainfo libmediainfo
 ```
 **FOR PACKAGING PDF FILES**
 ```
-sudo yum install java-1.8.0-openjdk
+yum install java-1.8.0-openjdk
 wget http://downloads.verapdf.org/rel/verapdf-installer.zip
 unzip verapdf-installer.zip
 cd verapdf-greenfield-1.22.3/
