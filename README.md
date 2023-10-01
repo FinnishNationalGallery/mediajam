@@ -1,9 +1,9 @@
 # MediaJam / Mediahillo
 
-MediaJam (Mediahillo) is a long term preservation packaging tool interface, developed in FInnish National Gallery.
+MediaJam (Mediahillo) is a long term preservation **packaging tool interface**, developed in FInnish National Gallery.
 MediaJam is a Flask application working in Python 3 environment.
 
-MediaJam uses dpres-siptools commands for packaging files. Therefore dpres-siptools MUST be installed to the same server. Read [AlmaLinux instuctions](README_AlmaLinux.md) before installind dpres-siptools.
+MediaJam uses dpres-siptools commands for packaging files. Therefore dpres-siptools MUST be installed to the same server. Read [AlmaLinux instructions](README_AlmaLinux.md) before installing dpres-siptools.
 https://github.com/Digital-Preservation-Finland/dpres-siptools
 
 MediaJam can get descriptive metadata from MuseumPlus collection management system through API-interface.
@@ -79,6 +79,6 @@ gunicorn -w 1 --timeout 28800 'app:app'
 gunicorn -w 1 --timeout 28800 'app:app' --access-logfile gunicorn-access.txt --error-logfile gunicorn-error.txt &
 # Check if gunicorn processes are in progress
 ps -aux | grep "gunicorn"
-# Kill gunicorn processes
+# Kill gunicorn processes so that you can restart application
 kill -9 #process number
 ``````
