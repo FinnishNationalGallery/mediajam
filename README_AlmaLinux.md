@@ -7,17 +7,17 @@ These guidelines are found by testing different combinations and solving error m
 
 > Digital-Preservation-FInland is developing RPM packages to make installation easier. Until then, these instructions are all there is.
 
-# FOR PACKAGING IMAGE FIlES 
+## FOR PACKAGING IMAGE FIlES 
 ```
 dnf install epel-release
 dnf install ImageMagick ImageMagick-devel
 dnf install perl-Image-ExifTool
 ```
-# FOR PACKAGING VIDEO FILES
+## FOR PACKAGING VIDEO FILES
 ```
 dnf install mediainfo-gui mediainfo libmediainfo
 ```
-# FOR PACKAGING PDF FILES
+## FOR PACKAGING PDF FILES
 ```
 sudo yum install java-1.8.0-openjdk
 wget http://downloads.verapdf.org/rel/verapdf-installer.zip
@@ -26,7 +26,7 @@ cd verapdf-greenfield-1.22.3/
 ./verapdf-install
 Huom! PATH on oltava /usr/share/java/verapdf
 ```
-# FOR USING FFMPEG PROGRAM COMMANDS
+## FOR USING FFMPEG PROGRAM COMMANDS
 https://computingforgeeks.com/install-use-ffmpeg-on-rocky-alma-9/
 ```
 dnf install epel-release
