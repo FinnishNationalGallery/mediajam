@@ -15,12 +15,14 @@ https://gunicorn.org/
 ## Installation
 
 As user root:
+
 ...
-# Create user for application
 adduser pasisti
 passwd pasisti
 ...
-1. Install MediaJam as user pasisti:
+
+Install MediaJam as user pasisti:
+
 ...
 cd /home/pasisti
 git clone https://github.com/FinnishNationalGallery/mediajam.git mediahillo
@@ -29,7 +31,9 @@ python3 -m venv venv/ 
 source venv/bin/activate
 pip install -r requirements.txt
 ...
-2. Install dpres-siptools as user pasisti:
+
+Install dpres-siptools as user pasisti:
+
 ...
 git clone https://github.com/Digital-Preservation-Finland/dpres-siptools
 cd dpres-siptools
@@ -38,7 +42,9 @@ pip install -r requirements_github.txt
 pip install .
 import-object --help
 ...
-3. Install and configure NGINX as user root:
+
+Install and configure NGINX as user root:
+
 ...
 dnf update -y && dnf upgrade -y
 dnf install nano
@@ -64,7 +70,9 @@ nano /etc/nginx/nginx.conf
 # 
 systemctl restart nginx
 ...
-4. Start Flask application with gunicorn www-server as user pasisti:
+
+Start Flask application with gunicorn www-server as user pasisti:
+
 ...
 cd /home/pasisti/mediahillo
 # Configure .env file from env.txt 
@@ -74,7 +82,9 @@ cp env.txt .env
 gunicorn -w 1 --timeout 28800 'app:app'
 # Now you can go to servers home page and see MediaJam in action
 ...
+
 Other commands for gunicorn management:
+
 ...
 # Start gunicorn to background and use access and error logfiles
 gunicorn -w 1 --timeout 28800 'app:app' --access-logfile gunicorn-access.txt --error-logfile gunicorn-error.txt &
