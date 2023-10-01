@@ -12,7 +12,7 @@ https://museoliitto.fi/kookos/
 Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with Gunicorn and NGINX www-servers.
 https://gunicorn.org/
 
-![MediaJam / Mediahillo](/static/FNG-Siptools.jpg | width=400)
+![MediaJam / Mediahillo](/static/FNG-Siptools.jpg)
 
 ## Installation
 As user root:
