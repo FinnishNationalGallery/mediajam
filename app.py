@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, url_for, flash, redirect, send_file, session, Markup, jsonify
+from flask import Flask, render_template, request, url_for, flash, redirect, send_file, session, jsonify
+from markupsafe import Markup
 import os
 import shutil
 import subprocess

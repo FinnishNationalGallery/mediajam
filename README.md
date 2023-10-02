@@ -3,14 +3,11 @@
 MediaJam (Mediahillo) is a long term preservation **packaging tool interface**, developed in FInnish National Gallery.
 MediaJam is a Flask application working in Python 3 environment.
 
-MediaJam uses dpres-siptools commands for packaging files. Therefore dpres-siptools MUST be installed to the same server. Read [AlmaLinux instructions](README_AlmaLinux.md) before installing dpres-siptools.
-https://github.com/Digital-Preservation-Finland/dpres-siptools
+MediaJam uses [dpres-siptools](https://github.com/Digital-Preservation-Finland/dpres-siptools) commands for packaging files. Therefore [dpres-siptools](https://github.com/Digital-Preservation-Finland/dpres-siptools) MUST be installed to the same server. Read [AlmaLinux instructions](README_AlmaLinux.md) before installing dpres-siptools.
 
-MediaJam can get descriptive metadata from MuseumPlus collection management system through API-interface.
-https://museoliitto.fi/kookos/
+MediaJam can get descriptive metadata from [MuseumPlus](https://museoliitto.fi/kookos/) collection management system through API-interface.
 
-Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with Gunicorn and NGINX www-servers.
-https://gunicorn.org/
+Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with [Gunicorn](https://gunicorn.org/) and [NGINX](https://www.nginx.com/) www-servers.
 
 ## Installation
 As user root:
@@ -37,6 +34,7 @@ cd dpres-siptools
 pip install --upgrade pip==20.2.4 setuptools
 pip install -r requirements_github.txt
 pip install .
+# Test dpres-siptools import-object command with printing help
 import-object --help
 ``````
 Install and configure NGINX as user root:
@@ -48,10 +46,11 @@ systemctl enable nginx
 systemctl start nginx
 # Configure nginx using gunicorn reverse proxy installation
 nano /etc/nginx/nginx.conf
-# Add this configuration to nginx.conf file
+# Add this configuration to nginx.conf file for http server (and https server if needed)
         location / {
         proxy_read_timeout 28800;
-        proxy_connect_timeout 28800;        proxy_send_timeout 28800;
+        proxy_connect_timeout 28800;        
+        proxy_send_timeout 28800;
         proxy_pass http://127.0.0.1:8000/;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
