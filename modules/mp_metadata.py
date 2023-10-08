@@ -91,7 +91,13 @@ def get_object_by_number(object_inv):
     ria = mp_api.get_objects_by_number(object_inv, MP_URL, MP_PASS)
     mp_response = requests.request(method=ria[0], url=ria[1], verify=True, params=ria[2], data=ria[3], auth=ria[4], headers=ria[5])
     input = BytesIO(mp_response.content)
-    tree = et.parse(input)
+    try:
+        tree = et.parse(input)
+    except:
+        totalSize="0"
+        mylist=[["1","Error:"],["2","MuseumPlus API interface:"],["3","503 Service Temporarily Unavailable"]]
+        xml=""
+        return totalSize, mylist, xml
     mylist = []
     ns_mod = {'ns':'http://www.zetcom.com/ria/ws/module'}
     ###############################################
@@ -135,7 +141,13 @@ def get_object_by_title(title):
     ria = mp_api.get_objects_by_title(title, MP_URL, MP_PASS)
     mp_response = requests.request(method=ria[0], url=ria[1], verify=True, params=ria[2], data=ria[3], auth=ria[4], headers=ria[5])
     input = BytesIO(mp_response.content)
-    tree = et.parse(input)
+    try:
+        tree = et.parse(input)
+    except:
+        totalSize="0"
+        mylist=[["1","Error:"],["2","MuseumPlus API interface:"],["3","503 Service Temporarily Unavailable"]]
+        xml=""
+        return totalSize, mylist, xml
     mylist = []
     ns_mod = {'ns':'http://www.zetcom.com/ria/ws/module'}
     ###############################################

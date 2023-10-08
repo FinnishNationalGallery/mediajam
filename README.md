@@ -27,7 +27,8 @@ pip install -r requirements.txt
 Install dpres-siptools as user pasisti:
 ``````
 cd /home/pasisti/mediahillo
-# If not acivated already
+# If Python virtual enironment is not activated yet
+# Use same Python virtual environment as MediaJam
 source venv/bin/activate
 git clone https://github.com/Digital-Preservation-Finland/dpres-siptools
 cd dpres-siptools
