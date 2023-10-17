@@ -17,6 +17,9 @@ import modules.pas_rest as pas_rest
 import modules.mp_paslog_mod as mp_paslog_mod
 from flask_sqlalchemy import SQLAlchemy
 ##############################
+# This is needed when Flask application is behind proxy
+from werkzeug.middleware.proxy_fix import ProxyFix
+##############################
 #### LOGIN MANAGER IMPORTS 
 ##############################
 from flask_mail import Mail, Message
@@ -28,6 +31,10 @@ import uuid
 ##############################
 
 app = Flask(__name__)
+# This is needed when Flask application is behind proxy
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 #executor = Executor(app)
 #app.config['EXECUTOR_TYPE'] = 'thread'
