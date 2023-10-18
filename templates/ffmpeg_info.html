@@ -23,6 +23,13 @@
             </b></br>
             <small>ffmpeg -i Pipilotti_Rist.mov -vcodec ffv1 -level 3 -g 1 -slicecrc 1 -context 1 -acodec flac Pipilotti_Rist_FFV1_FLAC.mkv</small>
             </br>
+
+            <b>
+                Video stream to FFV1 and TWO Audio streams to FLAC:
+            </b></br>
+            <small>ffmpeg -i Michael_Smith-Secret_horror_DV.mov -map 0:0 -map 0:2 -vcodec:0 ffv1 -level 3 -g 1 -slicecrc 1 -context 1 -acodec:2 flac Michael_Smith-Secret_FFV1_2xFLAC.mkv</small>
+            </br>
+            
             <b>
                 Only Audio stream to FLAC in Matroska .mkv container:
             </b></br>
