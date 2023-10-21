@@ -69,6 +69,23 @@
                 
             </div>
             <hr>
+            <div>
+                Createdate value for packet update (original METS createdate value) 
+                {{ form.mets_createdate(placeholder="mets_createdate", value=settings['mets_createdate'],
+                style='width: 100%;
+                font-weight: bold;
+                padding: 12px 20px ;
+                margin: 8px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box') }}
+                {% for error in form.mets_createdate.errors %}
+                <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+                
+            </div>
+
+            <hr>
             <p>{{ form.submit(style ='background-color: #4CAF50;
                 color: white;
                 font-weight: bold;
@@ -78,6 +95,7 @@
                 border: none;
                 border-radius: 4px') }}
             </p>
+            
         </form>  
     </div>
     <div class="column is-one-quarter">

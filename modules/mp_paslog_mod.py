@@ -8,19 +8,30 @@ config = dotenv_values(".env")
 DATA_path = config['DATA_FOLDER']
 METADATA_path = config['METADATA_FOLDER']
 #
-MP_URL = config['MP_TEST_URL'] 
-MP_PASSI = config['MP_TEST_PASS']
+if "Production" in config['CONF_PASLOG']:
+    MP_URL = config['MP_PROD_URL'] 
+    MP_PASSI = config['MP_PROD_PASS']
+    MP_ENV = 'MuseumPlus PRODUCTION ENVIRONMENT'
+else:
+    MP_URL = config['MP_TEST_URL'] 
+    MP_PASSI = config['MP_TEST_PASS']
+    MP_ENV = 'MuseumPlus TESTING ENVIRONMENT'
 MP_PASS = tuple(MP_PASSI.split(","))
 MP_PASSI_WRITE = config['MP_TEST_PASS_WRITE']
 MP_PASS_WRITE = tuple(MP_PASSI_WRITE.split(","))
-MP_ENV = 'MuseumPlus TESTING ENVIRONMENT'
 #
-REST_SERVER = config['REST_SERVER_TEST']
-REST_AUTH = config['REST_AUTH_TEST']
+if "Production" in config['CONF_PASLOG']:
+    REST_SERVER = config['REST_SERVER_PROD']
+    REST_AUTH = config['REST_AUTH_PROD']
+    REST_ENV = 'CSC-PAS PRODUCTION ENVIRONMENT'
+else:
+    REST_SERVER = config['REST_SERVER_TEST']
+    REST_AUTH = config['REST_AUTH_TEST']
+    REST_ENV = 'CSC-PAS TESTING ENVIRONMENT'
 REST_PASS = tuple(REST_AUTH.split(","))
 REST_URNUUID = config['REST_URNUUID']
 REST_URL = REST_SERVER + REST_URNUUID
-REST_ENV = 'CSC-PAS TESTING ENVIRONMENT'
+
 
 # This is better way to parse XML response
 def get_mp_object_by_paslog():

@@ -5,10 +5,14 @@ from dotenv import dotenv_values
 config = dotenv_values(".env") 
 KEY_PATH = config['PRIVATE_KEY_PATH']
 KEY_PASS = config['PRIVATE_KEY_PASS']
-SFTP_HOST = config['SFTP_HOST_TEST']
-SFTP_USER = config['SFTP_USER']
-SFTP_ENV = 'PAS TESTING ENVIRONMENT'
 DOWNLOAD_FOLDER = config['DOWNLOAD_FOLDER']
+SFTP_USER = config['SFTP_USER']
+if "Production" in config['CONF_SFTP']:
+    SFTP_HOST = config['SFTP_HOST_PROD']
+    SFTP_ENV = 'PAS PRODUCTION ENVIRONMENT'
+else:
+    SFTP_HOST = config['SFTP_HOST_TEST']
+    SFTP_ENV = 'PAS TESTING ENVIRONMENT'
 
 def folder(folderpath):
     cnopts = pysftp.CnOpts()

@@ -3,11 +3,17 @@ import requests
 from dotenv import dotenv_values
 
 config = dotenv_values(".env") 
-REST_SERVER = config['REST_SERVER_TEST']
-REST_AUTH = config['REST_AUTH_TEST']
+if "Production" in config['CONF_REST']:
+    REST_SERVER = config['REST_SERVER_PROD']
+    REST_AUTH = config['REST_AUTH_PROD']
+    REST_ENV = 'PAS PRODUCTION ENVIRONMENT'
+else:
+    REST_SERVER = config['REST_SERVER_TEST']
+    REST_AUTH = config['REST_AUTH_TEST']
+    REST_ENV = 'PAS TESTING ENVIRONMENT'
+    
 REST_PASS = tuple(REST_AUTH.split(","))
 REST_URNUUID = config['REST_URNUUID']
-REST_ENV = 'PAS TESTING ENVIRONMENT'
 REST_URL = REST_SERVER + REST_URNUUID
 
 def get_status():

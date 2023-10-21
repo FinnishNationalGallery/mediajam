@@ -11,10 +11,16 @@ config = dotenv_values(".env")
 DATA_path = config['DATA_FOLDER']
 METADATA_path = config['METADATA_FOLDER']
 LIDO_SOURCE = config['LIDO_SOURCE']
-MP_URL = config['MP_TEST_URL'] 
-MP_PASSI = config['MP_TEST_PASS']
+if "Production" in config['CONF_MP']:
+    MP_URL = config['MP_PROD_URL'] 
+    MP_PASSI = config['MP_PROD_PASS']
+    MP_ENV = 'MuseumPlus PRODUCTION ENVIRONMENT'
+else:
+    MP_URL = config['MP_TEST_URL'] 
+    MP_PASSI = config['MP_TEST_PASS']
+    MP_ENV = 'MuseumPlus TESTING ENVIRONMENT'
 MP_PASS = tuple(MP_PASSI.split(","))
-MP_ENV = 'MuseumPlus TESTING ENVIRONMENT'
+
 
 def read_lido_xml():
     try:
@@ -99,6 +105,8 @@ def get_object_by_number(object_inv):
         xml=""
         return totalSize, mylist, xml
     mylist = []
+    totalSize="0"
+    xml=""
     ns_mod = {'ns':'http://www.zetcom.com/ria/ws/module'}
     ###############################################
     def get_values(element):
@@ -149,6 +157,8 @@ def get_object_by_title(title):
         xml=""
         return totalSize, mylist, xml
     mylist = []
+    totalSize="0"
+    xml=""
     ns_mod = {'ns':'http://www.zetcom.com/ria/ws/module'}
     ###############################################
     def get_values(element):

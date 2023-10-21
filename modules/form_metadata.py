@@ -12,6 +12,7 @@ class SearchMuseumPlus(FlaskForm):
 class Settings(FlaskForm):
     premis_video_normalization_date = DateTimeField('Your premis_video_normalization_date', format='%Y-%m-%dT%H:%M')    
     premis_video_normalization_agent = StringField('premis_video_normalization_agent', validators= [Length(min=0, max=200)])
+    mets_createdate = StringField('mets_createdate', validators= [Length(min=0, max=200)])
     submit = SubmitField('Save')
 
 

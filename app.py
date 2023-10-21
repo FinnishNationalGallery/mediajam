@@ -250,9 +250,11 @@ def settings():
       normalization_date = form.premis_video_normalization_date.data
       normalization_date_str = normalization_date.strftime('%Y-%m-%dT%H:%M')
       normalization_agent = form.premis_video_normalization_agent.data
+      mets_createdate = form.mets_createdate.data
       settings = {
         "prem_norm_date": normalization_date_str,
-        "prem_norm_agent": normalization_agent}
+        "prem_norm_agent": normalization_agent,
+        "mets_createdate": mets_createdate}
       json_obj = json.dumps(settings, indent=4)
       try:
          file = open("settings.json", "w")
@@ -272,7 +274,8 @@ def settings():
       except:
          settings = {
          "prem_norm_date": "",
-         "prem_norm_agent": ""}
+         "prem_norm_agent": "",
+         "mets_createdate": ""}
          json_obj = json.dumps(settings, indent=4)
          file = open("settings.json", "w")
          file.write(json_obj)
@@ -692,6 +695,27 @@ def sip_compile_mets():
    else:
       objid = str(uuid.uuid1())
    subprocess_args('compile-mets','--workspace', SIP_path , 'ch', ORGANIZATION, CONTRACTID, '--objid',objid, '--copy_files', '--clean')
+   if redir == 'once':
+      return redirect(url_for('sip'))
+   return True
+
+@app.route("/sip_compile_mets_update")
+@login_required
+def sip_compile_mets_update():
+   redir = request.args.get('flag') # If you want to make own button for this function
+   LastmodDate = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3))).isoformat() 
+   ###
+   file = open("settings.json", "r")
+   content = file.read()
+   settings = json.loads(content)
+   file.close()
+   mets_createdate = settings['mets_createdate']
+   ###
+   if session['mp_inv']:
+      objid = session['mp_inv']
+   else:
+      objid = str(uuid.uuid1())
+   subprocess_args('compile-mets','--workspace', SIP_path , 'ch', ORGANIZATION, CONTRACTID, '--objid',objid, '--create_date', mets_createdate, '--last_moddate', LastmodDate, '--record_status', 'update', '--copy_files', '--clean')
    if redir == 'once':
       return redirect(url_for('sip'))
    return True
