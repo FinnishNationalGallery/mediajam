@@ -70,7 +70,7 @@
             <a href="{{url_for('sip_make_tar')}}?flag=once"><button class="button is-success" id="hide1">Compress</button></a>
             Compress tar-package which you can send to preservation
             <hr>
-            OR make operations one at a time
+            <strong>OR</strong> make operations one at a time (METS update package possible this way)
             <hr>     
             &larr;
             <a href="{{url_for('sip_premis_event_created')}}?flag=once"><button class="button is-info" id="hide2">Add-premis-event</button></a>
@@ -82,16 +82,16 @@
             </br></br>
             &larr;
             <a href="{{url_for('sip_compile_mets')}}?flag=once"><button class="button is-info" id="hide4">Compile-mets</button></a>
-            OR
-            <a href="{{url_for('sip_compile_mets_update')}}?flag=once"><button class="button is-warning" id="hide4">METS-update</button></a>
+            <strong>OR</strong>
+            <a href="{{url_for('sip_compile_mets_update')}}?flag=once"><button class="button is-warning" id="hide5">METS-update</button></a>
             Compile METS XML file
             </br></br>
             &larr;
-            <a href="{{url_for('sip_sign_mets')}}?flag=once"><button class="button is-info" id="hide5">Sign-mets</button></a>
+            <a href="{{url_for('sip_sign_mets')}}?flag=once"><button class="button is-info" id="hide6">Sign-mets</button></a>
             Sign SIP METS
             </br></br>
             &larr;
-            <a href="{{url_for('sip_make_tar')}}?flag=once"><button class="button is-info" id="hide6">Copress tar</button></a>
+            <a href="{{url_for('sip_make_tar')}}?flag=once"><button class="button is-info" id="hide7">Copress tar</button></a>
             Compress SIP to tar file
         </div>
         <div class="box">
