@@ -10,6 +10,7 @@ import modules.mp_api as mp_api
 config = dotenv_values(".env") 
 DATA_path = config['DATA_FOLDER']
 METADATA_path = config['METADATA_FOLDER']
+SIP_path = config['SIP_FOLDER']
 LIDO_SOURCE = config['LIDO_SOURCE']
 if "Production" in config['CONF_MP']:
     MP_URL = config['MP_PROD_URL'] 
@@ -52,6 +53,38 @@ def read_lido_xml():
         mp_name = ""
         mp_created = ""
     return mp_inv, mp_id, mp_name, mp_created
+
+def read_mets_lido_xml():
+    try:
+        files = os.listdir(SIP_path)
+        for file in files:
+            if "mets.xml" in file:
+                filepath = SIP_path + file
+                metsfile = open(filepath, "r")
+                xml_obj = xmltodict.parse(metsfile.read())
+                lido_wrap = xml_obj['mets:mets']['mets:dmdSec']['mets:mdWrap']['mets:xmlData']['lido:lidoWrap']
+                lido_name = lido_wrap['lido:lido']['lido:descriptiveMetadata']['lido:objectIdentificationWrap']['lido:titleWrap']['lido:titleSet']['lido:appellationValue']['#text']
+                lido_inv = lido_wrap['lido:lido']['lido:lidoRecID']['#text']
+                recordWrap = lido_wrap['lido:lido']['lido:administrativeMetadata']['lido:recordWrap']
+                lido_id = recordWrap['lido:recordID']['#text']
+                if recordWrap['lido:recordInfoSet']['lido:recordMetadataDate'] == None:
+                    lido_created = datetime.datetime.now().isoformat()
+                else:
+                    CreatedDate = recordWrap['lido:recordInfoSet']['lido:recordMetadataDate']
+                    CreatedDateISO = CreatedDate.replace(" ", "T")
+                    lido_created = CreatedDateISO
+                metsfile.close()
+    except:
+        lido_inv = ""
+        lido_id = ""
+        lido_name = ""
+        lido_created = ""
+    if not os.path.exists(SIP_path + "mets.xml"):
+        lido_inv = ""
+        lido_id = ""
+        lido_name = ""
+        lido_created = ""
+    return lido_inv, lido_id, lido_name, lido_created
 
 def save_object_by_id(object_id):
     thumb_stat = False

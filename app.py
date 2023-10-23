@@ -735,12 +735,18 @@ def sip_sign_mets():
 @login_required
 def sip_make_tar():
    redir = request.args.get('flag') # If you want to make own button for this function
-   if session['mp_id']:
-      sip_filename = session['mp_id'] + '.tar'
+   lido_inv, lido_id, lido_name, lido_created = mp_metadata.read_mets_lido_xml()
+   if lido_id > "":
+      sip_filename = lido_id + '.tar'
+      message = "TAR package from mets.xml file: "+lido_name + ", Inv nro: " +lido_inv + ", MuseumPlus ID: " + lido_id
+      msg_status = "success"
    else:
       sip_filename = str(uuid.uuid1()) + '.tar'
+      message = "SOMETHING WENT WRONG! TAR package name is: " + sip_filename
+      msg_status = "error"
    subprocess_args('compress', '--tar_filename',  sip_filename, SIP_path)
    if redir == 'once':
+      flash( message,msg_status)
       return redirect(url_for('sip'))
    return True
 
