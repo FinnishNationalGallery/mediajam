@@ -47,16 +47,24 @@
                 <thead>
                     <tr>
                         <th>CREATED</th>
+                        <th>LASTMODDATE</th>
                         <th>MP_ID</th>
                         <th>MP_INV</th>
                         <th>Type</th>
+                        <th>Fetch </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for result in message['data']['results']: %}
                     <tr>
-                        {% if result is defined and result['match'] is defined and result['match']['mets_dmdSec_CREATED'] is defined and result['match']['mets_dmdSec_CREATED'][0] is defined %}
-                        <td>{{result['match']['mets_dmdSec_CREATED'][0]}}</td>
+                        {% if result is defined %}
+                        <td>{{result['createdate']}}</td>
+                        {% else %}
+                        <td class="has-text-danger">Something went wrong</td>
+                        {% endif %}
+
+                        {% if result is defined and result['lastmoddate'] is defined %}
+                        <td>{{result['lastmoddate'][-1]}}</td>
                         {% else %}
                         <td class="has-text-danger">Something went wrong</td>
                         {% endif %}
@@ -74,6 +82,13 @@
                         {% endif %}
                         
                         <td>{{result['pkg_type']}}</td>
+
+                        <td>
+                            <form action="{{url_for('pas_rest_disseminate_aip')}}" method="post">
+                                <button class="button is-small is-success" name="aipid" value={{result['id']}}>Disseminate</button>
+                            </form>
+                        </td>
+
                     </tr>
                     {%endfor%}
                 </tbody>

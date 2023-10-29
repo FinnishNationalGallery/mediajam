@@ -25,11 +25,17 @@
             </br>
 
             <b>
-                Video stream to FFV1 and TWO Audio streams to FLAC:
+                Video stream to FFV1 and TWO Audio streams to two different FLAC streams:
             </b></br>
             <small>ffmpeg -i Michael_Smith-Secret_horror_DV.mov -map 0:0 -map 0:1 -map 0:2 -c:v:0 ffv1 -level 3 -g 1 -slicecrc 1 -context 1 -c:a:0 flac -c:a:1 flac Michael_Smith-Secret_FFV1_2xFLAC.mkv</small>
             </br>
-            
+
+            <b>
+                Video stream to FFV1 and COMBINE two different FLAC audio streams into one audio stream:
+            </b></br>
+            <small>ffmpeg -i Michael_Smith-Secret_horror_DV-FFV1_FLACx2.mkv -filter_complex amix=inputs=2 -c:v copy -c:a flac Michael_Smith-Secret_horror_DV-FFV1_FLACx1.mkv</small>
+            </br>
+
             <b>
                 Only Audio stream to FLAC in Matroska .mkv container:
             </b></br>
