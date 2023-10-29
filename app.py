@@ -976,7 +976,10 @@ def get_csc_paslog():
          if check_csc_id == []: # If same ID not found, then insert to database
             pas_mp_id =result['match']['mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID'][0]
             pas_id = result['id'] 
-            pas_created = result['createdate'] 
+            if 'lastmoddate' in result:
+               pas_created = result['lastmoddate'][-1] 
+            else:
+               pas_created = result['createdate']
             pas_location = result['location'] 
             paslog_mark = db_paslog_csc(pas_mp_id = pas_mp_id, pas_id = pas_id, pas_created = pas_created, pas_location = pas_location)
             db.session.add(paslog_mark)
@@ -985,7 +988,10 @@ def get_csc_paslog():
             csc_update = db_paslog_csc.query.filter_by(pas_id = result['id']).first()
             csc_update.pas_mp_id =result['match']['mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID'][0]
             csc_update.pas_id = result['id'] 
-            csc_update.pas_created = result['createdate'] 
+            if 'lastmoddate' in result:
+               csc_update.pas_created = result['lastmoddate'][-1] 
+            else:
+               csc_update.pas_created = result['createdate']
             csc_update.pas_location = result['location'] 
             db.session.commit()
    except Exception as e:

@@ -54,7 +54,13 @@
                             <tr>
                                 <td> {{ result['match']['mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID'][0] }} </td>
                                 <td> {{ result['id'] }} </td>
-                                <td> {{ result['createdate'] }} </td> 
+
+                                {% if result is defined and result['lastmoddate'] is defined %}
+                                <td> {{result['lastmoddate'][-1]}} </td>
+                                {% else %}
+                                <td> {{result['createdate']}} </td>
+                                {% endif %}
+
                             </tr>
                             {% endfor %}
                         </table>
