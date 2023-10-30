@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, send_file, session, jsonify
 from markupsafe import Markup
 import os
+import glob
 import shutil
 import subprocess
 import datetime
@@ -288,7 +289,7 @@ def settings():
 @app.route('/data')
 @login_required
 def data():
-   files = os.listdir(DATA_path)
+   files = sorted(os.listdir(DATA_path))
    diskinfo = get_diskinfo()
    if 'message' in session:
       pass
@@ -449,8 +450,8 @@ def data_delete():
 @app.route('/datanative')
 @login_required
 def datanative():
-   files = os.listdir(DATANATIVE_path)
-   files_outcome = os.listdir(DATA_path)
+   files = sorted(os.listdir(DATANATIVE_path))
+   files_outcome = sorted(os.listdir(DATA_path))
    diskinfo = get_diskinfo()
    try:
       with open(SIPLOG_path+"datanative.txt") as f:
@@ -497,7 +498,7 @@ def datanative_import():
 @app.route("/metadata")
 @login_required
 def metadata():
-   files = os.listdir(METADATA_path)
+   files = sorted(os.listdir(METADATA_path))
    return render_template('metadata.html', files=files, environment=mp_metadata.MP_ENV)
 
 @app.route("/metadata_get")
@@ -646,7 +647,7 @@ def sip():
          outerr = f.read()
    except:
       outerr = ""
-   files = os.listdir(SIP_path)
+   files = sorted(os.listdir(SIP_path))
    ###
    return render_template('sip.html', files=files, diskinfo=diskinfo, output=output, outerr=outerr)
 
@@ -782,7 +783,15 @@ def sip_delete():
 @app.route("/download")
 @login_required
 def download():
-   files = os.listdir(DOWNLOAD_path)
+   #files = sorted(os.listdir(DOWNLOAD_path))
+   files = list(filter(os.path.isfile, glob.glob(DOWNLOAD_path + "*")))
+   files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+   idx = 0
+   for item in files:
+      if DOWNLOAD_path in item:
+         item2 = item.replace(DOWNLOAD_path, "")
+         files[idx] = item2
+      idx = idx + 1
    return render_template('download.html', files=files)
 
 @app.route("/download_delete")
