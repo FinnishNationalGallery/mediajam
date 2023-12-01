@@ -366,6 +366,21 @@ def audiomd_create():
       return redirect(url_for('sip'))
    return True
 
+@app.route('/addml_create')
+@login_required
+def addml_create():
+   redir = request.args.get('flag') # If you want to make own button for this function
+   files = os.listdir(DATA_path)
+   for file in files:
+      filesplit = file.split('.')
+      extension = filesplit[-1].lower()
+      filepath = DATA_path + file
+      if extension in ['csv']:
+         subprocess_args('create-addml',filepath, '--workspace', SIP_path, ' --header', '--charset', 'UTF8', '--sep', 'CR+LF', '--quot', '"', '--delim' ',')
+   if redir == 'once':
+      return redirect(url_for('sip'))
+   return True
+
 @app.route('/data_premis_event_ffmpeg_ffv1')
 @login_required
 def data_premis_event_ffmpeg_ffv1(): # Matroska video FFMPEG normalization event
