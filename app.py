@@ -376,7 +376,7 @@ def addml_create():
       extension = filesplit[-1].lower()
       filepath = DATA_path + file
       if extension in ['csv']:
-         subprocess_args('create-addml',filepath, '--workspace', SIP_path, ' --header', '--charset', 'UTF8', '--sep', 'CR+LF', '--quot', '"', '--delim', ',')
+         subprocess_args('create-addml',filepath, '--workspace', SIP_path, '--header', '--charset', 'UTF8', '--sep', 'CR+LF', '--quot', '"', '--delim', ',')
    if redir == 'once':
       return redirect(url_for('sip'))
    return True
