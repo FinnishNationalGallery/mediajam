@@ -359,7 +359,7 @@ def audiomd_create():
       filesplit = file.split('.')
       extension = filesplit[-1].lower()
       filepath = DATA_path + file
-      if extension in ['mp4', 'mpg', 'mpeg', 'mov', 'mkv', 'avi']:
+      if extension in ['mp4', 'mpg', 'mpeg', 'mov', 'mkv', 'avi', 'wav']:
          subprocess_args('create-audiomd','--workspace', SIP_path, filepath)
          #executor.submit_stored('AUDIOMD', subprocess_args, 'create-audiomd','--workspace', SIP_path, filepath)
    if redir == 'once':
