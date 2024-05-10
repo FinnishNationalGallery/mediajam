@@ -50,7 +50,7 @@
                         <th>LASTMODDATE</th>
                         <th>MP_ID</th>
                         <th>MP_INV</th>
-                        <th>Type</th>
+                        <th>AIP ID</th>
                         <th>Fetch </th>
                     </tr>
                 </thead>
@@ -81,7 +81,7 @@
                         <td class="has-text-danger">Something went wrong</td>
                         {% endif %}
                         
-                        <td>{{result['pkg_type']}}</td>
+                        <td>{{result['id']}}</td>
 
                         <td>
                             <form action="{{url_for('pas_rest_disseminate_aip')}}" method="post">

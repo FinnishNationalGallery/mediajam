@@ -53,7 +53,7 @@
                 <a href="{{url_for('file_delete')}}?name={{file}}&page=download&path=DOWNLOAD"><span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
                 <span class="material-symbols-outlined">arrow_forward</span>
                 <span class="material-symbols-outlined">file_open</span>
-                <a href="static/DOWNLOAD/{{file}}">{{file}}</a> </br>
+                <a href="{{DOWNLOAD_path}}{{file}}">{{file}}</a> </br>
                 {% endfor %}
                 </div>
             </div>

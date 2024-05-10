@@ -51,7 +51,7 @@
                 <a href="{{url_for('file_delete')}}?name={{file}}&page=sip&path=SIP"><span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
                 &rarr;
                 <span class="material-symbols-outlined">file_open</span>
-                <a href="static/SIP/{{file}}">{{file}}</a> </br>
+                <a href="{{SIP_path}}{{file}}">{{file}}</a> </br>
                 {% endfor %}
                 </div>
             </div>

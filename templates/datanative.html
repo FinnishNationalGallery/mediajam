@@ -46,7 +46,7 @@
                 <a href="{{url_for('file_delete')}}?name={{file}}&page=datanative&path=DATANATIVE"> <span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
                 &rarr; 
                 <span class="material-symbols-outlined">file_open</span>
-                <a href="static/DATANATIVE/{{file}}">{{file}}</a> 
+                <a href="{{DATANATIVE_path}}{{file}}">{{file}}</a> 
                 <input type="hidden" id="file" name="file" value={{file}}>
                 </br>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

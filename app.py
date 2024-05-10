@@ -86,7 +86,7 @@ def get_diskinfo():
    cmd = 'df -h ' + APP_FOLDER
    out = subprocess.run(cmd, shell=True, executable='/bin/bash',stdout=PIPE, stderr=PIPE, universal_newlines=True)
    dioutput = out.stdout
-   dioutput = dioutput.split("/dev/")
+   dioutput = dioutput.split("\n")
    diskinfo = dioutput[1]
    diskinfo = diskinfo.split()
    return diskinfo  
@@ -295,7 +295,7 @@ def data():
       pass
    else:
       session['message'] = ""
-   return render_template('data.html', files=files, diskinfo=diskinfo)
+   return render_template('data.html', files=files, diskinfo=diskinfo, DATA_path=DATA_path)
 
 @app.route('/data_import_all')
 @login_required
@@ -477,7 +477,7 @@ def datanative():
       pass
    else:
       session['message'] = ""
-   return render_template('datanative.html', files=files, files_outcome=files_outcome, diskinfo=diskinfo, datanative=datanative)
+   return render_template('datanative.html', files=files, files_outcome=files_outcome, diskinfo=diskinfo, datanative=datanative, DATANATIVE_path=DATANATIVE_path)
 
 @app.route('/datanative_import/', methods=['GET', 'POST'])
 @login_required
@@ -514,7 +514,7 @@ def datanative_import():
 @login_required
 def metadata():
    files = sorted(os.listdir(METADATA_path))
-   return render_template('metadata.html', files=files, environment=mp_metadata.MP_ENV)
+   return render_template('metadata.html', files=files, environment=mp_metadata.MP_ENV, METADATA_path=METADATA_path)
 
 @app.route("/metadata_get")
 @login_required
@@ -664,7 +664,7 @@ def sip():
       outerr = ""
    files = sorted(os.listdir(SIP_path))
    ###
-   return render_template('sip.html', files=files, diskinfo=diskinfo, output=output, outerr=outerr)
+   return render_template('sip.html', files=files, diskinfo=diskinfo, output=output, outerr=outerr, SIP_path=SIP_path)
 
 @app.route("/sip_make_all")
 @login_required
@@ -807,7 +807,7 @@ def download():
          item2 = item.replace(DOWNLOAD_path, "")
          files[idx] = item2
       idx = idx + 1
-   return render_template('download.html', files=files)
+   return render_template('download.html', files=files, DOWNLOAD_path=DOWNLOAD_path)
 
 @app.route("/download_delete")
 @login_required
@@ -1056,14 +1056,31 @@ def get_mp_paslog():
 @app.route('/paslog_show_data')
 @login_required
 def paslog_show_data():
+   # Define the Paslog class
+   class Paslog:
+      def __init__(self, id, pas_mp_id, pas_created, pas_id, mp_paslog):
+         self.id = id
+         self.pas_mp_id = pas_mp_id
+         self.pas_created = pas_created
+         self.pas_id = pas_id
+         self.mp_paslog = mp_paslog
+   # Create an empty list to store Paslog objects
+   pdata = []
    try:
-      # Fetch data from the table
-      #data = db.session.query(db_paslog_csc).all()
-      #data = db.session.query(db_paslog_csc).order_by(db_paslog_csc.mp_paslog.asc(), db_paslog_csc.pas_created.desc()).all()
       data = db.session.query(db_paslog_csc).filter(db_paslog_csc.mp_paslog == None).order_by(db_paslog_csc.mp_paslog.asc(), db_paslog_csc.pas_created.desc()).all()
+      for row in data:
+         donotmark = False
+         # Check if there is already log mark made by same MuseumPlus ID
+         check = db.session.query(db_paslog_csc).filter(db_paslog_csc.pas_mp_id == row.pas_mp_id, db_paslog_csc.mp_paslog != None).all()
+         for p in check:
+            if len(p.mp_paslog) > 0: # Found PAS log mark already done
+               donotmark = True
+         if donotmark == False:
+            # Create Paslog objects and add them to the list
+            pdata.append(Paslog(id=row.id, pas_mp_id=row.pas_mp_id, pas_created=row.pas_created, pas_id=row.pas_id, mp_paslog=row.mp_paslog))
+      totalSize = len(pdata)
       db.session.commit()
-      totalSize = len(data)
-      return render_template('paslog_show_data.html', data=data, totalSize=totalSize)
+      return render_template('paslog_show_data.html', data=pdata, totalSize=totalSize)
    except Exception as e:
       return f'Error fetching MP marked data: {str(e)}', 500
 

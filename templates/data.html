@@ -45,7 +45,7 @@
                 <a href="{{url_for('file_delete')}}?name={{file}}&page=data&path=DATA"> <span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
                 &rarr; 
                 <span class="material-symbols-outlined">file_open</span>
-                <a href="static/DATA/{{file}}">{{file}}</a> </br>
+                <a href="{{DATA_path}}{{file}}">{{file}}</a> </br>
                 {% endfor %}
                 </div>
             </div>
