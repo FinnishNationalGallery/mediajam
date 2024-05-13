@@ -5,8 +5,6 @@ MediaJam is a Flask application working in Python 3 environment.
 
 MediaJam uses [dpres-siptools](https://github.com/Digital-Preservation-Finland/dpres-siptools) commands for packaging files. Therefore [dpres-siptools](https://github.com/Digital-Preservation-Finland/dpres-siptools) MUST be installed to the same server. 
 
-> Read [AlmaLinux instructions](README_AlmaLinux.md) and install dpres-siptools. 
-
 MediaJam can get descriptive metadata from [MuseumPlus](https://www.zetcom.com/en/kookos-collection-management-services-to-be-transferred-to-zetcom-nordics/) collection management system through API-interface.
 
 Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with [Gunicorn](https://gunicorn.org/) and [NGINX](https://www.nginx.com/) www-servers.
@@ -14,6 +12,8 @@ Application is tested with AlmaLinux 9 server. Flask application was installed a
 ## Installation
 As user root:
 ``````
+First read [AlmaLinux instructions](README_AlmaLinux.md) and install dpres-siptools
+Then add user for MediaJam:
 adduser pasisti
 passwd pasisti
 ``````
