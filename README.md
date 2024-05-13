@@ -10,7 +10,7 @@ MediaJam can get descriptive metadata from [MuseumPlus](https://www.zetcom.com/e
 Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with [Gunicorn](https://gunicorn.org/) and [NGINX](https://www.nginx.com/) www-servers.
 
 ## Installation
-> As user root:
+As user root:
 ``````
 adduser pasisti
 passwd pasisti
