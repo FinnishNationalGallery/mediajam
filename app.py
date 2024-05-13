@@ -300,12 +300,11 @@ def data():
 @app.route('/data_import_all')
 @login_required
 def data_import_all():
-   data_import_skip()
+   #data_import_skip()
+   data_import()
    mix_create()
    videomd_create()
    audiomd_create()
-   #data_premis_event_ffmpeg_ffv1()
-   #data_premis_event_frame_md()
    return redirect(url_for('sip'))
 
 @app.route('/data_import_skip')
@@ -313,6 +312,16 @@ def data_import_all():
 def data_import_skip():
    redir = request.args.get('flag')
    subprocess_args('import-object', '--workspace', SIP_path, '--skip_wellformed_check', DATA_path)
+   #executor.submit_stored('IMPORT', subprocess_args, 'import-object', '--workspace', SIP_path, '--skip_wellformed_check', DATA_path)
+   if redir == 'once':
+      return redirect(url_for('sip'))
+   return True
+
+@app.route('/data_import')
+@login_required
+def data_import():
+   redir = request.args.get('flag')
+   subprocess_args('import-object', '--workspace', SIP_path, DATA_path)
    #executor.submit_stored('IMPORT', subprocess_args, 'import-object', '--workspace', SIP_path, '--skip_wellformed_check', DATA_path)
    if redir == 'once':
       return redirect(url_for('sip'))
@@ -740,9 +749,8 @@ def sip_compile_mets_update():
 @login_required
 def sip_sign_mets():
    redir = request.args.get('flag') # If you want to make own button for this function
-   #subprocess_args('./sign.sh', '/home/pasisti/mediahillo/signature/sip_sign_pas.pem', SIP_path)
-   subprocess_args('./sign.sh', SIGNATURE, SIP_path)
-   #subprocess_args('sign-mets', '--workspace', SIP_path, '/home/pasisti/mediahillo/signature/sip_sign_pas.pem')
+   #subprocess_args('./sign.sh', SIGNATURE, SIP_path)
+   subprocess_args('sign-mets', SIGNATURE, '--workspace', SIP_path)
    if redir == 'once':
       return redirect(url_for('sip'))
    return True
