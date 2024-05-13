@@ -11,8 +11,8 @@ Application is tested with AlmaLinux 9 server. Flask application was installed a
 
 ## Installation
 As user root:
-``````
 First read [AlmaLinux instructions](README_AlmaLinux.md) and install dpres-siptools
+``````
 Then add user for MediaJam:
 adduser pasisti
 passwd pasisti
