@@ -10,7 +10,7 @@ MediaJam can get descriptive metadata from [MuseumPlus](https://www.zetcom.com/e
 Application is tested with AlmaLinux 9 server. Flask application was installed as a reverse-proxy installation with [Gunicorn](https://gunicorn.org/) and [NGINX](https://www.nginx.com/) www-servers.
 
 ## Installation
-As user root:
+> As user root:
 ``````
 adduser pasisti
 passwd pasisti
@@ -23,20 +23,6 @@ cd mediahillo
 python3 -m venv venv/ 
 source venv/bin/activate
 pip install -r requirements.txt
-``````
-Install dpres-siptools as user pasisti:
-``````
-cd /home/pasisti/mediahillo
-# If Python virtual enironment is not activated yet
-# Use same Python virtual environment as MediaJam
-source venv/bin/activate
-git clone https://github.com/Digital-Preservation-Finland/dpres-siptools
-cd dpres-siptools
-pip install --upgrade pip==20.2.4 setuptools
-pip install -r requirements_github.txt
-pip install .
-# Test dpres-siptools import-object command with printing help
-import-object --help
 ``````
 Install and configure NGINX as user root:
 ``````
