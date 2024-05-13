@@ -9,8 +9,8 @@ Digital-Preservation-Finland has developed RPM packages to make installation eas
 
 **INSTALL BASIC TOOLS**
 ```
-dnf install  git
-dnf install  tar
+dnf install git
+dnf install tar
 dnf install nano
 ```
 **INSTALL RPM TOOLS**
