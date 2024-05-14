@@ -28,8 +28,6 @@ pip install -r requirements.txt
 ``````
 Install and configure NGINX as user root:
 ``````
-dnf update -y && dnf upgrade -y
-dnf install nano
 dnf install nginx -y
 systemctl enable nginx
 systemctl start nginx
