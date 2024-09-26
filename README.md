@@ -24,7 +24,9 @@ git clone https://github.com/FinnishNationalGallery/mediajam.git mediahillo
 cd mediahillo
 python3 -m venv venv/ 
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt 
+OR use this for Flask 3 version
+pip install -r requirements-flask3.txt
 ``````
 Install and configure NGINX as user root:
 ``````
