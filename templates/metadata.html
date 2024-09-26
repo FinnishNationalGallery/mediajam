@@ -50,7 +50,7 @@
             <div class="card-content">
                 <div class="content">
                 {% for file in files %}
-                <a href="{{url_for('file_delete')}}?name={{file}}&page=data&path=METADATA"><span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
+                <a href="{{url_for('file_delete')}}?name={{file}}&page=metadata&path=METADATA"><span class="material-symbols-outlined has-text-danger">delete_forever</span></a>
                 <span class="material-symbols-outlined">arrow_forward</span>
                 <span class="material-symbols-outlined">file_open</span>
                 <a href="{{METADATA_path}}{{file}}">{{file}}</a> </br>
