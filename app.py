@@ -13,7 +13,7 @@ from dotenv import dotenv_values
 #from flask_executor import Executor
 import modules.mp_metadata as mp_metadata
 import modules.form_metadata as form_metadata
-import modules.pas_sftp as pas_sftp
+import modules.pas_sftp_paramiko as pas_sftp
 import modules.pas_rest as pas_rest
 import modules.mp_paslog_mod as mp_paslog_mod
 from flask_sqlalchemy import SQLAlchemy
