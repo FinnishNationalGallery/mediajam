@@ -28,8 +28,8 @@ def get_status():
     return r_json
 
 def get_accepted_created(created):
-    #url = REST_URL+"search?q=OBJID:* AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:*"
-    url = REST_URL+"search?q=mets_dmdSec_CREATED:"+ created + " AND mets_OBJID:* AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:* &limit=1000"
+    #Use ?* or /.*/ for Apache Lucene wildcard search
+    url = REST_URL+"search?q=mets_dmdSec_CREATED:"+ created + " AND mets_OBJID:/.*/ AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:/.*/ &limit=1000"
     authentication = REST_PASS
     counter = 0
     try:
@@ -45,7 +45,8 @@ def get_accepted_created(created):
     return r_json, counter, error
 
 def get_accepted_mpid(mpid):
-    url = REST_URL+"search?q=mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:" + mpid + " AND mets_OBJID:* AND mets_dmdSec_CREATED:* &limit=1000"
+    #Use ?* or /.*/ for Apache Lucene wildcard search
+    url = REST_URL+"search?q=mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:" + mpid + " AND mets_OBJID:/.*/ AND mets_dmdSec_CREATED:/.*/ &limit=1000"
     authentication = REST_PASS
     counter = 0
     try:
@@ -61,7 +62,8 @@ def get_accepted_mpid(mpid):
     return r_json, counter, error
 
 def get_accepted_mpinv(mpinv):
-    url = REST_URL+"search?q=mets_OBJID:" + mpinv + " AND mets_dmdSec_CREATED:* AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:* &limit=1000"
+    #Use ?* or /.*/ for Apache Lucene wildcard search
+    url = REST_URL+"search?q=mets_OBJID:" + mpinv + " AND mets_dmdSec_CREATED:/.*/ AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:/.*/ &limit=1000"
     authentication = REST_PASS
     counter = 0
     try:
