@@ -999,7 +999,7 @@ def paslog_index():
 def get_csc_paslog():
    error = ""
    try:
-      r_json, counter, error = mp_paslog_mod.get_accepted_created_by_id("/.*/")
+      r_json, counter, error = mp_paslog_mod.get_accepted_created_by_id("*?")
       if 'status' in r_json and 'data' in r_json and 'results' in r_json['data']: 
          results = r_json['data']['results'] 
       for result in results: 
