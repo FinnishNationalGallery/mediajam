@@ -68,7 +68,7 @@ def get_mp_object_by_paslog():
 
 def get_accepted_created_by_id(created):
     #url = REST_URL+"search?q=OBJID:* AND mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:*"
-    url = REST_URL+"search?q=mets_dmdSec_CREATED:"+ created + " mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:* &limit=1000"
+    url = REST_URL+"search?q=mets_dmdSec_CREATED:"+ created + " mets_dmdSec_mdWrap_xmlData_lidoWrap_lido_administrativeMetadata_recordWrap_recordID:/.*/ &limit=1000"
     authentication = REST_PASS
     counter = 0
     try:
