@@ -916,9 +916,9 @@ def pas_rest_accepted_created():
    if request.method == 'POST':
       created = "\"" + request.form['created'] + "\""
       if request.form['created'] == "":
-         created = "*"
+         created = "/.*/"
       if request.form['created'] == "*":
-         created = "*"
+         created = "/.*/"
       value = request.form['created']
       try:
          message, counter, error = pas_rest.get_accepted_created(created)
@@ -940,9 +940,9 @@ def pas_rest_accepted_mpid():
    if request.method == 'POST':
       mpid = request.form['mpid'] + "*"
       if request.form['mpid'] == "":
-         mpid = "*"
+         mpid = "/.*/"
       if request.form['mpid'] == "*":
-         mpid = "*"
+         mpid = "/.*/"
       value = request.form['mpid']
       try:
          message, counter, error = pas_rest.get_accepted_mpid(mpid)
@@ -964,9 +964,9 @@ def pas_rest_accepted_mpinv():
    if request.method == 'POST':
       mpinv = "\"" + request.form['mpinv'] + "\""
       if request.form['mpinv'] == "":
-         mpinv = "*"
+         mpinv = "/.*/"
       if request.form['mpinv'] == "*":
-         mpinv = "*"
+         mpinv = "/.*/"
       value = request.form['mpinv']
       try:
          message, counter, error = pas_rest.get_accepted_mpinv(mpinv)
